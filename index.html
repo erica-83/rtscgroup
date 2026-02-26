@@ -3,200 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RTSC Group — Real Transformative Solutions Consulting</title>
-    <meta name="description" content="RTSC Group provides expert nonprofit consulting in grant writing, strategic planning, fundraising, and organizational development.">
+    <title>RTSC Group — Nonprofit Consulting</title>
+    <meta name="description" content="RTSC Group provides expert nonprofit consulting — grant writing, strategic planning, fundraising, and organizational development for mission-driven organizations.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --navy:#2B3674;--navy-deep:#1A1F4B;--navy-light:#4A56A0;
-            --gold:#C9A94E;--gold-bright:#DFC06A;--gold-pale:#F9F3E3;
-            --cream:#FAFAFC;--white:#FFFFFF;--off-white:#F5F5F8;
-            --g100:#EEEFF4;--g200:#DDDFE8;--g400:#9BA0B8;--g500:#7B82A0;
-            --g600:#5E6488;--g700:#434970;--text:#1E2240;--muted:#6B7294;
-            --r:16px;--rl:24px;--rxl:32px;
-            --sh:0 8px 32px rgba(26,31,75,0.06);
-            --shl:0 16px 56px rgba(26,31,75,0.10);
-            --shxl:0 24px 80px rgba(26,31,75,0.14);
-            --tr:0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+        :root{
+            --blue:#2E3B8C;--blue-deep:#1A2463;--blue-mid:#3D4DAE;--blue-light:#5C6BD6;
+            --blue-pale:#E8EAF6;--blue-ghost:#F3F4FB;
+            --accent:#00BFA5;--accent-dark:#009688;--accent-light:#B2DFDB;
+            --warm:#FF6B35;
+            --white:#FFFFFF;--off:#F7F8FC;--cream:#FAFAFE;
+            --g50:#F5F6FA;--g100:#ECEEF5;--g200:#D8DAE8;--g300:#B4B8D0;
+            --g400:#8E94B4;--g500:#6B7294;--g600:#515777;--g700:#3A3F5C;--g800:#252842;
+            --text:#1A1D2E;--muted:#6B7294;
+            --r:12px;--rl:20px;--rxl:28px;
+            --sh:0 4px 24px rgba(26,36,99,0.06);
+            --shl:0 12px 48px rgba(26,36,99,0.10);
+            --tr:0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth;scroll-padding-top:80px}
-        body{font-family:'Outfit',-apple-system,sans-serif;color:var(--text);background:var(--cream);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-        h1,h2,h3,h4{font-family:'Instrument Serif',Georgia,serif;line-height:1.15;color:var(--navy-deep)}
+        body{font-family:'Inter',-apple-system,sans-serif;color:var(--text);background:var(--white);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        h1,h2,h3{font-family:'Playfair Display',Georgia,serif;line-height:1.2;color:var(--blue-deep)}
+        h4,h5,h6{font-family:'Inter',sans-serif}
         img{max-width:100%;display:block}
-        a{text-decoration:none}
-        .container{max-width:1240px;margin:0 auto;padding:0 28px}
+        a{text-decoration:none;color:inherit}
+        .container{max-width:1280px;margin:0 auto;padding:0 32px}
 
-        .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);transition:var(--tr)}
-        .nav.scrolled{box-shadow:0 1px 16px rgba(26,31,75,0.06)}
-        .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
-        .nav-logo{display:flex;align-items:center;gap:14px}
-        .nav-logo img{width:42px;height:42px;object-fit:contain}
-        .nav-logo-text{font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--navy-deep)}
-        .nav-logo-text span{color:var(--gold)}
-        .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-        .nav-links a{color:var(--g600);font-size:.88rem;font-weight:500;padding:10px 18px;border-radius:12px;transition:var(--tr)}
-        .nav-links a:hover{color:var(--navy);background:var(--g100)}
-        .nav-cta{background:var(--navy)!important;color:#fff!important;padding:11px 26px!important;border-radius:12px!important;font-weight:600!important;margin-left:10px!important}
-        .nav-cta:hover{background:var(--navy-light)!important}
+        /* NAV - BCG style: clean, minimal, white */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--white);transition:var(--tr)}
+        .nav.scrolled{box-shadow:0 1px 0 var(--g100)}
+        .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+        .nav-logo{display:flex;align-items:center;gap:12px}
+        .nav-logo img{width:40px;height:40px;object-fit:contain}
+        .nav-logo-text{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--blue-deep)}
+        .nav-logo-text span{color:var(--blue-mid)}
+        .nav-links{display:flex;align-items:center;gap:0;list-style:none}
+        .nav-links a{color:var(--g600);font-size:.85rem;font-weight:500;padding:8px 20px;transition:var(--tr);letter-spacing:.01em}
+        .nav-links a:hover{color:var(--blue)}
+        .nav-cta{background:var(--blue)!important;color:var(--white)!important;padding:10px 28px!important;border-radius:8px!important;font-weight:600!important;margin-left:12px!important}
+        .nav-cta:hover{background:var(--blue-mid)!important}
         .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
-        .hamburger span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:var(--tr)}
+        .hamburger span{display:block;width:20px;height:2px;background:var(--blue-deep);margin:5px 0;border-radius:1px;transition:var(--tr)}
+        .nav-line{height:1px;background:var(--g100)}
 
-        .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;border-radius:14px;font-size:.95rem;font-weight:600;transition:var(--tr);cursor:pointer;border:none;font-family:inherit}
-        .btn-primary{background:var(--gold);color:var(--navy-deep)}
-        .btn-primary:hover{background:var(--gold-bright);transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,169,78,0.25)}
-        .btn-secondary{background:#fff;color:var(--navy);border:2px solid var(--g200)}
-        .btn-secondary:hover{border-color:var(--navy);transform:translateY(-2px)}
-        .btn-dark{background:var(--navy);color:#fff}
-        .btn-dark:hover{background:var(--navy-light);transform:translateY(-2px)}
-        .btn-white{background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px)}
-        .btn-white:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4)}
+        /* BUTTONS */
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-size:.9rem;font-weight:600;transition:var(--tr);cursor:pointer;border:none;font-family:inherit;letter-spacing:.01em}
+        .btn-primary{background:var(--blue);color:var(--white)}
+        .btn-primary:hover{background:var(--blue-mid);transform:translateY(-1px)}
+        .btn-outline{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+        .btn-outline:hover{background:var(--blue);color:var(--white)}
+        .btn-accent{background:var(--accent);color:var(--white)}
+        .btn-accent:hover{background:var(--accent-dark);transform:translateY(-1px)}
+        .btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.3)}
+        .btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.6)}
+        .btn-arrow::after{content:'→';margin-left:4px;transition:transform .2s}
+        .btn-arrow:hover::after{transform:translateX(3px)}
 
-        .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-        .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80') center/cover no-repeat}
-        .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,31,75,0.92),rgba(43,54,116,0.85) 50%,rgba(74,86,160,0.78))}
-        .hero-inner{position:relative;z-index:2;padding:160px 0 120px;max-width:800px}
-        .hero-chip{display:inline-flex;align-items:center;gap:10px;background:rgba(201,169,78,0.12);border:1px solid rgba(201,169,78,0.25);color:var(--gold-bright);font-size:.8rem;font-weight:600;padding:8px 20px;border-radius:100px;margin-bottom:28px;letter-spacing:.08em;text-transform:uppercase}
-        .hero-chip .dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
-        .hero h1{font-size:clamp(3rem,6vw,4.5rem);color:#fff;margin-bottom:24px;letter-spacing:-.02em}
-        .hero h1 em{font-style:italic;color:var(--gold-bright)}
-        .hero-sub{font-size:1.2rem;color:rgba(255,255,255,0.6);margin-bottom:44px;max-width:560px;line-height:1.8;font-weight:300}
-        .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
-        .hero-proof{margin-top:72px;display:flex;gap:48px;flex-wrap:wrap}
-        .hero-stat-num{font-family:'Instrument Serif',serif;font-size:2.4rem;color:var(--gold-bright);line-height:1}
-        .hero-stat-label{font-size:.78rem;color:rgba(255,255,255,0.4);font-weight:500;margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+        /* HERO - BCG editorial style with video */
+        .hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:var(--blue-deep)}
+        .hero-video{position:absolute;inset:0;z-index:0}
+        .hero-video video{width:100%;height:100%;object-fit:cover;opacity:.35}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,36,99,0.88) 0%,rgba(46,59,140,0.75) 60%,rgba(92,107,214,0.6) 100%);z-index:1}
+        .hero-inner{position:relative;z-index:2;padding:140px 0 100px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+        .hero-content{}
+        .hero-tag{display:inline-block;color:var(--accent);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;margin-bottom:20px}
+        .hero h1{font-size:clamp(2.8rem,5vw,4.2rem);color:var(--white);margin-bottom:24px;letter-spacing:-.02em}
+        .hero h1 em{color:var(--accent);font-style:italic}
+        .hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.65);margin-bottom:40px;max-width:480px;line-height:1.8;font-weight:300}
+        .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+        .hero-img{position:relative}
+        .hero-img img{width:100%;border-radius:var(--rl);box-shadow:0 32px 80px rgba(0,0,0,0.3)}
+        .hero-img-badge{position:absolute;bottom:-20px;left:-20px;background:var(--accent);color:var(--white);padding:16px 24px;border-radius:var(--r);font-weight:700;font-size:.9rem;box-shadow:var(--shl)}
 
+        /* SECTIONS */
         .section{padding:120px 0}
-        .section-label{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
-        .section-label::before{content:'';width:28px;height:2px;background:var(--gold);border-radius:2px}
-        .section-title{font-size:clamp(2.2rem,4vw,3.2rem);margin-bottom:16px;letter-spacing:-.02em}
-        .section-desc{font-size:1.1rem;color:var(--muted);max-width:580px;margin-bottom:60px;line-height:1.8}
+        .section-sm{padding:80px 0}
+        .section-label{color:var(--blue);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;margin-bottom:12px}
+        .section-title{font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:16px;letter-spacing:-.02em}
+        .section-desc{font-size:1.05rem;color:var(--muted);max-width:560px;margin-bottom:56px;line-height:1.8}
         .section-center{text-align:center}
         .section-center .section-desc{margin-left:auto;margin-right:auto}
+        .bg-off{background:var(--off)}
+        .bg-blue{background:var(--blue-deep);color:var(--white)}
+        .bg-blue .section-label{color:var(--accent)}
+        .bg-blue .section-title{color:var(--white)}
+        .bg-blue .section-desc{color:rgba(255,255,255,0.55)}
 
+        /* ABOUT - editorial two-column */
         .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-        .about-images{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-        .about-img{border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh)}
-        .about-img img{width:100%;height:240px;object-fit:cover;transition:transform .6s ease}
-        .about-img:hover img{transform:scale(1.04)}
-        .about-img:first-child{grid-row:span 2}
-        .about-img:first-child img{height:100%;min-height:496px}
-        .about-text p{color:var(--muted);margin-bottom:20px;font-size:1.05rem}
-        .about-highlights{display:flex;flex-direction:column;gap:18px;margin-top:36px}
-        .about-highlight{display:flex;gap:16px;align-items:flex-start}
-        .about-highlight-icon{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--gold-pale),#F5EDD2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-        .about-highlight h4{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:3px}
-        .about-highlight p{font-size:.86rem;color:var(--g500);margin:0}
+        .about-img-wrap{position:relative}
+        .about-img-wrap img{width:100%;border-radius:var(--rl);box-shadow:var(--shl)}
+        .about-img-accent{position:absolute;top:-16px;left:-16px;width:120px;height:120px;border:3px solid var(--accent);border-radius:var(--rl);z-index:-1}
+        .about-text p{color:var(--muted);margin-bottom:20px;font-size:1rem}
+        .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;padding-top:32px;border-top:1px solid var(--g100)}
+        .about-stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--blue);line-height:1}
+        .about-stat-label{font-size:.78rem;color:var(--muted);margin-top:4px;font-weight:500}
 
-        .bg-white{background:#fff}
-        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-        .service-card{background:var(--cream);border-radius:var(--rl);overflow:hidden;transition:var(--tr);border:1px solid var(--g100)}
-        .service-card:hover{transform:translateY(-6px);box-shadow:var(--shl);border-color:var(--g200)}
-        .service-card-img{width:100%;height:180px;object-fit:cover;transition:all .5s ease}
+        /* SERVICES - BCG card grid */
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .service-card{background:var(--white);border-radius:var(--rl);overflow:hidden;transition:var(--tr);border:1px solid var(--g100);position:relative}
+        .service-card:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+        .service-card-img{width:100%;height:200px;object-fit:cover;transition:transform .6s ease}
         .service-card:hover .service-card-img{transform:scale(1.03)}
-        .service-card-body{padding:28px 28px 32px}
-        .service-card-tag{display:inline-block;background:var(--navy);color:var(--gold-bright);font-size:.68rem;font-weight:700;padding:4px 12px;border-radius:6px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
-        .service-card h3{font-size:1.3rem;margin-bottom:10px}
-        .service-card p{font-size:.9rem;color:var(--muted);line-height:1.7}
+        .service-card-body{padding:28px}
+        .service-card-icon{width:40px;height:40px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .service-card-icon svg{width:20px;height:20px;color:var(--blue)}
+        .service-card h3{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--blue-deep)}
+        .service-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+        .service-card-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:.82rem;font-weight:600;margin-top:16px;transition:var(--tr)}
+        .service-card-link:hover{gap:10px;color:var(--blue-mid)}
 
-        .image-banner{position:relative;height:420px;overflow:hidden}
-        .image-banner img{width:100%;height:100%;object-fit:cover}
-        .image-banner-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,31,75,0.82),rgba(43,54,116,0.65));display:flex;align-items:center;justify-content:center;text-align:center;padding:40px}
-        .image-banner-content h2{font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:16px}
-        .image-banner-content p{color:rgba(255,255,255,0.6);font-size:1.15rem;max-width:540px;margin:0 auto}
+        /* FULL-WIDTH PHOTO BREAK */
+        .photo-break{position:relative;height:480px;overflow:hidden}
+        .photo-break video,.photo-break img{width:100%;height:100%;object-fit:cover}
+        .photo-break-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,36,99,0.85) 0%,rgba(26,36,99,0.4) 60%,transparent 100%);display:flex;align-items:center}
+        .photo-break-content{max-width:520px;padding-left:64px}
+        .photo-break-content h2{color:var(--white);font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:16px}
+        .photo-break-content p{color:rgba(255,255,255,0.6);font-size:1rem;margin-bottom:28px;line-height:1.7}
 
-        .pricing-tabs{display:flex;justify-content:center;gap:6px;margin-bottom:52px;flex-wrap:wrap;background:var(--g100);border-radius:16px;padding:6px;width:fit-content;margin-left:auto;margin-right:auto}
-        .pricing-tab{padding:11px 24px;border-radius:12px;font-size:.86rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--g500);transition:var(--tr);font-family:inherit}
-        .pricing-tab.active{background:var(--navy);color:#fff}
-        .pricing-tab:hover:not(.active){color:var(--navy)}
-        .pricing-panel{display:none}.pricing-panel.active{display:block}
-        .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-        .price-card{background:#fff;border:1.5px solid var(--g200);border-radius:var(--rl);padding:36px 28px;transition:var(--tr);position:relative}
-        .price-card.featured{border-color:var(--navy);box-shadow:var(--shl)}
-        .price-card.featured::before{content:'Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy-deep);font-size:.7rem;font-weight:700;padding:4px 16px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
-        .price-card:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-        .price-tier{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:6px}
-        .price-card h3{font-size:1.25rem;margin-bottom:8px}
-        .price-amount{font-family:'Instrument Serif',serif;font-size:2rem;color:var(--navy-deep);margin:14px 0 4px}
-        .price-amount span{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:400;color:var(--g400)}
-        .price-desc{font-size:.86rem;color:var(--muted);margin-bottom:22px;line-height:1.6}
-        .price-list{list-style:none;margin-bottom:28px}
-        .price-list li{font-size:.86rem;color:var(--muted);padding:7px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:10px}
-        .price-list li::before{content:'\2713';color:var(--navy-light);font-weight:700;min-width:16px;font-size:.8rem}
-        .price-list li:last-child{border-bottom:none}
-        .price-cta{display:block;text-align:center;width:100%;padding:13px 28px;font-size:.9rem}
-        .pricing-footer{text-align:center;margin-top:44px;padding:28px 32px;background:var(--gold-pale);border-radius:var(--r);font-size:.9rem;color:var(--g700)}
+        /* PROCESS - BCG horizontal timeline */
+        .process-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+        .process-row::before{content:'';position:absolute;top:28px;left:60px;right:60px;height:2px;background:var(--g200)}
+        .process-step{text-align:center;position:relative;padding:0 20px}
+        .process-num{width:56px;height:56px;margin:0 auto 20px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:var(--white);position:relative;z-index:1;border:4px solid var(--white);box-shadow:0 2px 12px rgba(46,59,140,0.2)}
+        .process-step h4{font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--blue-deep)}
+        .process-step p{font-size:.82rem;color:var(--muted);line-height:1.6}
 
-        .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-        .process-card{background:#fff;border-radius:var(--rl);padding:36px 28px;text-align:center;box-shadow:0 2px 8px rgba(26,31,75,0.04);border:1px solid var(--g100);transition:var(--tr);position:relative}
-        .process-card:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-        .process-num{width:56px;height:56px;margin:0 auto 20px;background:var(--navy);border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--gold-bright)}
-        .process-card h3{font-size:1.1rem;margin-bottom:10px}
-        .process-card p{font-size:.86rem;color:var(--muted)}
-        .process-connector{display:none;position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--g200);font-size:1.2rem}
+        /* CTA BANNER */
+        .cta-banner{position:relative;padding:100px 0;overflow:hidden}
+        .cta-banner-bg{position:absolute;inset:0}
+        .cta-banner-bg img{width:100%;height:100%;object-fit:cover}
+        .cta-banner-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,36,99,0.92),rgba(46,59,140,0.85))}
+        .cta-inner{position:relative;z-index:2;text-align:center;max-width:640px;margin:0 auto}
+        .cta-banner h2{color:var(--white);font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:16px}
+        .cta-banner p{color:rgba(255,255,255,0.55);font-size:1.1rem;margin-bottom:36px;line-height:1.8}
 
-        .cta-section{position:relative;padding:120px 0;overflow:hidden}
-        .cta-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&q=80') center/cover no-repeat}
-        .cta-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,31,75,0.93),rgba(43,54,116,0.88))}
-        .cta-inner{position:relative;z-index:2;text-align:center;max-width:680px;margin:0 auto}
-        .cta-section h2{color:#fff;font-size:clamp(2.2rem,4vw,3rem);margin-bottom:20px}
-        .cta-section p{color:rgba(255,255,255,0.55);font-size:1.15rem;margin-bottom:40px;line-height:1.8}
+        /* CONTACT */
+        .contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+        .contact-left h3{font-size:2rem;margin-bottom:16px}
+        .contact-left>p{color:var(--muted);margin-bottom:36px;font-size:1.02rem;line-height:1.8}
+        .contact-detail{display:flex;gap:14px;align-items:center;margin-bottom:20px;padding:14px 18px;background:var(--g50);border-radius:var(--r);transition:var(--tr)}
+        .contact-detail:hover{background:var(--blue-pale)}
+        .contact-detail-dot{width:10px;height:10px;background:var(--accent);border-radius:50%;flex-shrink:0}
+        .contact-detail strong{display:block;font-size:.88rem;color:var(--text)}
+        .contact-detail span{font-size:.82rem;color:var(--muted)}
+        .contact-form{background:var(--white);border-radius:var(--rxl);padding:44px;box-shadow:var(--shl);border:1px solid var(--g100)}
+        .form-group{margin-bottom:18px}
+        .form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--g700);margin-bottom:6px;letter-spacing:.02em}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;border:1.5px solid var(--g200);border-radius:10px;font-family:inherit;font-size:.9rem;color:var(--text);background:var(--g50);transition:var(--tr);outline:none}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 3px rgba(46,59,140,0.08)}
+        .form-group textarea{resize:vertical;min-height:110px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .btn-submit{width:100%;justify-content:center;font-size:.95rem;padding:14px}
 
-        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
-        .contact-info h3{font-size:1.8rem;margin-bottom:16px}
-        .contact-info>p{color:var(--muted);margin-bottom:36px;font-size:1.05rem}
-        .contact-detail{display:flex;gap:16px;align-items:center;margin-bottom:22px}
-        .contact-detail-icon{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--gold-pale),#F3EBD3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
-        .contact-detail span{font-size:.9rem;color:var(--muted)}
-        .contact-detail strong{display:block;font-size:.95rem;color:var(--text)}
-        .contact-form{background:#fff;border-radius:var(--rxl);padding:44px;box-shadow:var(--shxl);border:1px solid var(--g100)}
-        .form-group{margin-bottom:20px}
-        .form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--g700);margin-bottom:8px}
-        .form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 18px;border:1.5px solid var(--g200);border-radius:14px;font-family:inherit;font-size:.92rem;color:var(--text);background:var(--off-white);transition:var(--tr);outline:none}
-        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 4px rgba(43,54,116,0.06)}
-        .form-group textarea{resize:vertical;min-height:120px}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-        .btn-submit{width:100%;justify-content:center;font-size:1rem}
+        /* FOOTER - clean BCG style */
+        .footer{background:var(--g50);padding:64px 0 32px;border-top:1px solid var(--g100)}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+        .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+        .footer-brand img{width:36px;height:36px}
+        .footer-brand span{font-family:'Playfair Display',serif;font-weight:700;color:var(--blue-deep);font-size:1.1rem}
+        .footer-desc{color:var(--muted);font-size:.86rem;line-height:1.7;max-width:320px}
+        .footer-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--g700);margin-bottom:18px}
+        .footer-col a{display:block;color:var(--muted);font-size:.86rem;padding:4px 0;transition:var(--tr)}
+        .footer-col a:hover{color:var(--blue)}
+        .footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--g200);display:flex;justify-content:space-between;align-items:center;color:var(--g400);font-size:.78rem}
 
-        .footer{background:var(--navy-deep);padding:72px 0 36px}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
-        .footer-brand img{width:48px;height:48px;filter:brightness(0) invert(1);margin-bottom:16px}
-        .footer-brand p{color:rgba(255,255,255,0.35);font-size:.88rem;line-height:1.7;max-width:300px}
-        .footer-col h4{color:#fff;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
-        .footer-col a{display:block;color:rgba(255,255,255,0.35);font-size:.88rem;padding:5px 0;transition:var(--tr)}
-        .footer-col a:hover{color:var(--gold-bright)}
-        .footer-bottom{margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,0.25);font-size:.8rem}
-
-        @media(min-width:1025px){.process-card:not(:last-child) .process-connector{display:block}}
+        /* RESPONSIVE */
         @media(max-width:1024px){
-            .about-layout{grid-template-columns:1fr;gap:48px}.about-images{order:-1}
+            .hero-inner{grid-template-columns:1fr;gap:40px}.hero-img{display:none}
+            .about-layout{grid-template-columns:1fr;gap:48px}.about-img-wrap{order:-1}
             .services-grid{grid-template-columns:repeat(2,1fr)}
-            .pricing-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}
-            .process-grid{grid-template-columns:repeat(2,1fr)}
+            .process-row{grid-template-columns:repeat(2,1fr);gap:40px}
+            .process-row::before{display:none}
+            .contact-layout{grid-template-columns:1fr}
             .footer-grid{grid-template-columns:1fr 1fr}
+            .photo-break-content{padding-left:32px}
         }
         @media(max-width:768px){
             .nav-links{display:none}
-            .nav-links.open{display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;background:#fff;padding:16px 24px 28px;box-shadow:var(--shl);border-top:1px solid var(--g100)}
-            .nav-links.open a{padding:14px 18px}
+            .nav-links.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--white);padding:16px 24px 28px;box-shadow:0 8px 32px rgba(0,0,0,0.08);border-top:1px solid var(--g100)}
+            .nav-links.open a{padding:12px 16px}
             .nav-links.open .nav-cta{text-align:center;margin-left:0!important;margin-top:8px}
             .hamburger{display:block}
-            .hero{min-height:auto}.hero-inner{padding:140px 0 80px}.hero-proof{gap:32px}
-            .services-grid,.process-grid{grid-template-columns:1fr}
-            .contact-grid{grid-template-columns:1fr;gap:40px}
+            .hero{min-height:auto}.hero-inner{padding:120px 0 80px}
+            .services-grid,.process-row{grid-template-columns:1fr}
+            .form-row{grid-template-columns:1fr}
             .footer-grid{grid-template-columns:1fr;gap:32px}
             .footer-bottom{flex-direction:column;gap:8px;text-align:center}
-            .form-row{grid-template-columns:1fr}
-            .about-img:first-child img{min-height:300px}
-            .image-banner{height:300px}
             .section{padding:80px 0}
+            .photo-break{height:360px}
+            .photo-break-content{padding:0 24px}
+            .about-stats{grid-template-columns:repeat(3,1fr);gap:16px}
         }
-        .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+        .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
         .reveal.visible{opacity:1;transform:translateY(0)}
-        .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+        .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.25s}
     </style>
 </head>
 <body>
@@ -204,37 +209,39 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
     <div class="container nav-inner">
-        <a href="#" class="nav-logo">
-            <img src="assets/logo-nav.png" alt="RTSC Group">
-            <span class="nav-logo-text">RTSC <span>Group</span></span>
-        </a>
+        <a href="#" class="nav-logo"><img src="assets/logo-nav.png" alt="RTSC Group"><span class="nav-logo-text">RTSC <span>Group</span></span></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#contact" class="nav-cta">Start a Conversation</a></li>
         </ul>
         <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
+    <div class="nav-line"></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-    <div class="hero-bg"></div>
+    <div class="hero-video">
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80">
+            <source src="https://videos.pexels.com/video-files/3252118/3252118-sd_640_360_25fps.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="hero-overlay"></div>
     <div class="container hero-inner">
-        <div class="hero-chip"><span class="dot"></span> Nonprofit Consulting Experts</div>
-        <h1>Build a Stronger<br>Nonprofit. Make a<br>Greater <em>Impact.</em></h1>
-        <p class="hero-sub">Real Transformative Solutions Consulting Group partners with mission-driven organizations to secure funding, build capacity, and create lasting community change.</p>
-        <div class="hero-btns">
-            <a href="#contact" class="btn btn-primary">Schedule a Free Consultation &#8594;</a>
-            <a href="#services" class="btn btn-white">Explore Our Services</a>
+        <div class="hero-content">
+            <div class="hero-tag">Nonprofit Consulting</div>
+            <h1>Empowering Nonprofits to Achieve <em>Lasting Impact</em></h1>
+            <p class="hero-sub">RTSC Group partners with mission-driven organizations to secure funding, build capacity, and create real community change.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-accent btn-arrow">Schedule a Consultation</a>
+                <a href="#services" class="btn btn-ghost btn-arrow">Our Services</a>
+            </div>
         </div>
-        <div class="hero-proof">
-            <div><div class="hero-stat-num">127%</div><div class="hero-stat-label">Funding Increase</div></div>
-            <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">On-Time Delivery</div></div>
-            <div><div class="hero-stat-num">$M+</div><div class="hero-stat-label">Grants Secured</div></div>
-            <div><div class="hero-stat-num">15+</div><div class="hero-stat-label">Years Experience</div></div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=640&q=80" alt="Consulting team collaborating">
+            <div class="hero-img-badge">15+ Years of Expertise</div>
         </div>
     </div>
 </section>
@@ -243,281 +250,163 @@
 <section class="section" id="about">
     <div class="container">
         <div class="about-layout">
+            <div class="about-img-wrap reveal">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80" alt="Team strategy session">
+                <div class="about-img-accent"></div>
+            </div>
             <div class="about-text reveal">
                 <div class="section-label">About RTSC Group</div>
-                <h2 class="section-title">Real Solutions for Real Community Impact</h2>
-                <p>RTSC Group is a consulting firm dedicated to strengthening mission-driven organizations. We provide comprehensive services specializing in grant writing, strategic planning, fundraising, organizational development, and leadership coaching.</p>
-                <p>Our team brings deep expertise in cultivating data-driven outcomes, securing multimillion-dollar funding portfolios, and building sustainable growth strategies for nonprofits at every stage &#8212; from startup to scale.</p>
-                <div class="about-highlights">
-                    <div class="about-highlight">
-                        <div class="about-highlight-icon"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
-                        <div><h4>Data-Driven Strategies</h4><p>Every recommendation backed by research and measurable KPIs</p></div>
-                    </div>
-                    <div class="about-highlight">
-                        <div class="about-highlight-icon"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
-                        <div><h4>Hands-On Partnership</h4><p>We work alongside your team, not just deliver a report</p></div>
-                    </div>
-                    <div class="about-highlight">
-                        <div class="about-highlight-icon"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
-                        <div><h4>Mission-Aligned</h4><p>Solutions tailored to your unique mission and community context</p></div>
-                    </div>
+                <h2 class="section-title">Real Solutions for Organizations That Matter</h2>
+                <p>Real Transformative Solutions Consulting Group is dedicated to strengthening mission-driven organizations. We provide comprehensive consulting in grant writing, strategic planning, fundraising, organizational development, and leadership coaching.</p>
+                <p>Our team brings deep expertise in cultivating data-driven outcomes, securing multimillion-dollar funding portfolios, and building sustainable growth strategies for nonprofits at every stage.</p>
+                <div class="about-stats">
+                    <div><div class="about-stat-num">$M+</div><div class="about-stat-label">Grants Secured</div></div>
+                    <div><div class="about-stat-num">100%</div><div class="about-stat-label">On-Time Delivery</div></div>
+                    <div><div class="about-stat-num">15+</div><div class="about-stat-label">Years Experience</div></div>
                 </div>
-            </div>
-            <div class="about-images reveal">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Consulting team discussion"></div>
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80" alt="Professional working on strategy"></div>
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=80" alt="Team reviewing data"></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section bg-white" id="services">
+<section class="section bg-off" id="services">
     <div class="container">
         <div class="section-center reveal">
-            <div class="section-label">Our Services</div>
-            <h2 class="section-title">Everything Your Nonprofit Needs to Thrive</h2>
-            <p class="section-desc">From startup to sustainability, we provide end-to-end consulting tailored to your mission and community.</p>
+            <div class="section-label">Our Capabilities</div>
+            <h2 class="section-title">End-to-End Nonprofit Consulting</h2>
+            <p class="section-desc">From startup to sustainability, we deliver the strategies and tools your organization needs to thrive.</p>
         </div>
         <div class="services-grid">
-            <div class="service-card reveal reveal-delay-1">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80" alt="Grant proposal writing">
+            <div class="service-card reveal reveal-d1">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80" alt="Grant writing">
                 <div class="service-card-body">
-                    <div class="service-card-tag">Core Service</div>
                     <h3>Grant Writing &amp; Management</h3>
-                    <p>From prospect research through submission and post-award management. Foundation, state, federal, and corporate proposals developed to win.</p>
+                    <p>Prospect research through submission and post-award management. Foundation, state, federal, and corporate proposals developed to win.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
                 </div>
             </div>
-            <div class="service-card reveal reveal-delay-2">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=700&q=80" alt="Fundraising event planning">
+            <div class="service-card reveal reveal-d2">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80" alt="Strategic planning">
                 <div class="service-card-body">
-                    <div class="service-card-tag">Core Service</div>
-                    <h3>Fundraising &amp; Development</h3>
-                    <p>Major donor cultivation, annual campaigns, corporate sponsorships, event planning, and stewardship strategies for sustainable revenue.</p>
-                </div>
-            </div>
-            <div class="service-card reveal reveal-delay-3">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80" alt="Strategic planning session">
-                <div class="service-card-body">
-                    <div class="service-card-tag">Core Service</div>
                     <h3>Strategic Planning</h3>
-                    <p>Comprehensive SWOT analysis, community needs assessments, goal setting, and actionable plans with implementation support.</p>
+                    <p>Comprehensive SWOT analysis, community needs assessments, goal setting, and actionable multi-year plans with implementation support.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
                 </div>
             </div>
-            <div class="service-card reveal reveal-delay-1">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&q=80" alt="Startup team planning">
+            <div class="service-card reveal reveal-d3">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=700&q=80" alt="Fundraising strategy">
                 <div class="service-card-body">
-                    <div class="service-card-tag">Startup</div>
+                    <h3>Fundraising &amp; Development</h3>
+                    <p>Major donor cultivation, annual campaigns, corporate sponsorships, event strategy, and stewardship programs that build sustainable revenue.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
+                </div>
+            </div>
+            <div class="service-card reveal reveal-d1">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&q=80" alt="Nonprofit startup">
+                <div class="service-card-body">
                     <h3>Nonprofit Startup</h3>
-                    <p>Full entity creation: mission/vision, incorporation, EIN, 1023 tax exemption, bylaws, board formation, and IRS compliance.</p>
+                    <p>Full entity creation: mission/vision, incorporation, EIN, 1023 tax exemption, bylaws, board formation, and launch strategy.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
                 </div>
             </div>
-            <div class="service-card reveal reveal-delay-2">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="Board meeting">
+            <div class="service-card reveal reveal-d2">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="Board development">
                 <div class="service-card-body">
-                    <div class="service-card-tag">Leadership</div>
                     <h3>Board &amp; Leadership Development</h3>
-                    <p>Board recruitment, training, governance, performance evaluations, leadership coaching, and volunteer management.</p>
+                    <p>Board recruitment, training, governance, performance evaluations, leadership coaching, and volunteer management programs.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
                 </div>
             </div>
-            <div class="service-card reveal reveal-delay-3">
-                <img class="service-card-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Data analysis dashboard">
+            <div class="service-card reveal reveal-d3">
+                <img class="service-card-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Program evaluation">
                 <div class="service-card-body">
-                    <div class="service-card-tag">Impact</div>
                     <h3>Program Development &amp; Evaluation</h3>
-                    <p>Design and evaluate programs with clear goals, outcomes, and KPIs. Budget development and impact reporting for stakeholders.</p>
+                    <p>Design and evaluate programs with clear goals, outcomes, KPIs, budget development, and impact reporting for stakeholders.</p>
+                    <a href="#contact" class="service-card-link">Learn more &#8594;</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- IMAGE BANNER -->
-<div class="image-banner">
-    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80" alt="Team collaboration">
-    <div class="image-banner-overlay">
-        <div class="image-banner-content">
-            <h2>Your Mission Deserves<br>Expert Support</h2>
-            <p>We don't just consult &#8212; we partner with you to create success stories that transform communities.</p>
+<!-- PHOTO/VIDEO BREAK -->
+<div class="photo-break">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80">
+        <source src="https://videos.pexels.com/video-files/7534211/7534211-sd_640_360_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="photo-break-overlay">
+        <div class="photo-break-content">
+            <h2>Your Mission Deserves Expert Strategy</h2>
+            <p>We don't just consult &#8212; we partner with you to build success stories that transform communities.</p>
+            <a href="#contact" class="btn btn-accent btn-arrow">Work With Us</a>
         </div>
     </div>
 </div>
 
-<!-- PRICING -->
-<section class="section" id="pricing">
+<!-- APPROACH / PROCESS -->
+<section class="section" id="approach">
     <div class="container">
         <div class="section-center reveal">
-            <div class="section-label">Pricing</div>
-            <h2 class="section-title">Transparent, Flexible Pricing</h2>
-            <p class="section-desc">Choose the engagement model that fits your organization. All prices confirmed after a free needs assessment.</p>
-        </div>
-        <div class="pricing-tabs reveal">
-            <button class="pricing-tab active" data-tab="grants">Grant Writing</button>
-            <button class="pricing-tab" data-tab="strategy">Strategic Planning</button>
-            <button class="pricing-tab" data-tab="startup">Nonprofit Startup</button>
-            <button class="pricing-tab" data-tab="ongoing">Retainers &amp; Coaching</button>
-        </div>
-
-        <div class="pricing-panel active" id="panel-grants">
-            <div class="pricing-grid reveal">
-                <div class="price-card">
-                    <div class="price-tier">Tier 1</div><h3>Foundation &amp; Local Grants</h3>
-                    <div class="price-amount">$1,500 &#8211; $3,500 <span>per proposal</span></div>
-                    <p class="price-desc">Community grants and smaller foundation opportunities.</p>
-                    <ul class="price-list"><li>Initial consultation &amp; needs assessment</li><li>Eligibility research &amp; funder identification</li><li>Full proposal writing &amp; development</li><li>Budget creation &amp; narrative</li><li>Review, editing &amp; submission assistance</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-                <div class="price-card featured">
-                    <div class="price-tier">Tier 2</div><h3>Government &amp; Regional</h3>
-                    <div class="price-amount">$3,500 &#8211; $12,000 <span>per proposal</span></div>
-                    <p class="price-desc">State, regional, and federal grant applications.</p>
-                    <ul class="price-list"><li>Everything in Tier 1, plus:</li><li>In-depth research &amp; data gathering</li><li>Complex budget &amp; justification</li><li>Stakeholder collaboration</li><li>Grant reporting guidance</li></ul>
-                    <a href="#contact" class="btn btn-primary price-cta">Get Started</a>
-                </div>
-                <div class="price-card">
-                    <div class="price-tier">Tier 3</div><h3>Major Federal &amp; Corporate</h3>
-                    <div class="price-amount">$12,000 &#8211; $20,000+ <span>per proposal</span></div>
-                    <p class="price-desc">Large federal grants and major corporate foundations.</p>
-                    <ul class="price-list"><li>Everything in Tier 2, plus:</li><li>Literature review &amp; needs assessment</li><li>Logic models &amp; evaluation plans</li><li>External partner collaboration</li><li>Post-award support consultation</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-            </div>
-            <div class="pricing-footer reveal"><strong>Add-On Services:</strong> Grant Prospect Research ($500/mo) &#183; Letter of Inquiry ($500&#8211;$1,000) &#183; Grant Calendar ($250&#8211;$500) &#183; Post-Award Management (hourly/project) &#183; Grant SWOT Analysis (call for pricing)</div>
-        </div>
-
-        <div class="pricing-panel" id="panel-strategy">
-            <div class="pricing-grid reveal">
-                <div class="price-card">
-                    <div class="price-tier">Essential</div><h3>Fundraising Strategic Plan</h3>
-                    <div class="price-amount">$2,550</div>
-                    <p class="price-desc">Focused fundraising strategy with source research.</p>
-                    <ul class="price-list"><li>Funding source discovery &amp; planning</li><li>Revenue diversification strategy</li><li>Donor cultivation framework</li><li>Campaign calendar &amp; milestones</li><li>Implementation roadmap</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-                <div class="price-card featured">
-                    <div class="price-tier">Comprehensive</div><h3>Organizational Strategic Plan</h3>
-                    <div class="price-amount">$5,000 &#8211; $15,000</div>
-                    <p class="price-desc">Full SWOT, community needs, and multi-year plan.</p>
-                    <ul class="price-list"><li>Stakeholder interviews &amp; focus groups</li><li>SWOT &amp; community needs analysis</li><li>Benchmarking &amp; data compilation</li><li>In-person collaborative planning</li><li>Goals, tactics &amp; responsibilities</li><li>Actionable plan within 4 weeks</li><li>Implementation check-ins</li></ul>
-                    <a href="#contact" class="btn btn-primary price-cta">Get Started</a>
-                </div>
-                <div class="price-card">
-                    <div class="price-tier">Add-On</div><h3>Case for Support</h3>
-                    <div class="price-amount">$600</div>
-                    <p class="price-desc">Your fundraising narrative, backed by data.</p>
-                    <ul class="price-list"><li>Deep-dive into mission &amp; vision</li><li>Data-backed impact narrative</li><li>Measurable outcomes showcase</li><li>Collaborative development</li><li>Donor &amp; investor-ready document</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pricing-panel" id="panel-startup">
-            <div class="pricing-grid reveal">
-                <div class="price-card">
-                    <div class="price-tier">Foundation</div><h3>Entity Creation</h3>
-                    <div class="price-amount">$2,500 &#8211; $5,000</div>
-                    <p class="price-desc">Legally establish your nonprofit.</p>
-                    <ul class="price-list"><li>Mission, vision &amp; values</li><li>Naming &amp; incorporation</li><li>EIN obtainment</li><li>1023 tax exemption application</li><li>Articles of Incorporation</li><li>Bylaws ($525 standalone)</li><li>Board creation &amp; governance</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-                <div class="price-card featured">
-                    <div class="price-tier">Complete</div><h3>Launch Package</h3>
-                    <div class="price-amount">$8,000 &#8211; $18,000</div>
-                    <p class="price-desc">Entity creation + full organizational planning.</p>
-                    <ul class="price-list"><li>Everything in Entity Creation, plus:</li><li>Fundraising strategy &amp; case for support</li><li>Program development &amp; goals</li><li>Staff &amp; volunteer framework</li><li>Budget development</li><li>Marketing/communications strategy</li><li>Technology &amp; CRM guidance</li></ul>
-                    <a href="#contact" class="btn btn-primary price-cta">Get Started</a>
-                </div>
-                <div class="price-card">
-                    <div class="price-tier">Support</div><h3>Technical Assistance</h3>
-                    <div class="price-amount">$200 &#8211; $250 <span>/hour</span></div>
-                    <p class="price-desc">Targeted help for specific challenges.</p>
-                    <ul class="price-list"><li>1023 application review</li><li>Individual proposal reviews</li><li>Donor capacity assessments</li><li>Compliance &amp; governance</li><li>Custom consulting</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pricing-panel" id="panel-ongoing">
-            <div class="pricing-grid reveal">
-                <div class="price-card">
-                    <div class="price-tier">Hourly</div><h3>Consulting Sessions</h3>
-                    <div class="price-amount">$200 &#8211; $250 <span>/hour</span></div>
-                    <p class="price-desc">Flexible support for specific needs.</p>
-                    <ul class="price-list"><li>Grant research &amp; identification</li><li>Proposal review &amp; feedback</li><li>Budget development</li><li>Grant writing workshops</li><li>Board development coaching</li><li>DEI assessments &amp; planning</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-                <div class="price-card featured">
-                    <div class="price-tier">Monthly</div><h3>Retainer Agreement</h3>
-                    <div class="price-amount">From $2,000 <span>/month</span></div>
-                    <p class="price-desc">Dedicated monthly hours and priority access.</p>
-                    <ul class="price-list"><li>10+ hours per month (customizable)</li><li>Flexible mix of services</li><li>Priority scheduling</li><li>Ongoing grant management</li><li>Donor engagement strategy</li><li>Regular progress check-ins</li></ul>
-                    <a href="#contact" class="btn btn-primary price-cta">Get Started</a>
-                </div>
-                <div class="price-card">
-                    <div class="price-tier">Coaching</div><h3>Leadership &amp; Board</h3>
-                    <div class="price-amount">Custom <span>pricing</span></div>
-                    <p class="price-desc">For executive teams, boards, and staff.</p>
-                    <ul class="price-list"><li>Board recruitment &amp; training</li><li>Governance &amp; compliance</li><li>Fundraising coaching for boards</li><li>Leadership development</li><li>Volunteer engagement strategy</li><li>Organizational assessments</li></ul>
-                    <a href="#contact" class="btn btn-secondary price-cta">Get Started</a>
-                </div>
-            </div>
-            <div class="pricing-footer reveal"><strong>Payment Terms:</strong> Project-based work is 50% upfront, 50% upon completion. Hourly and retainer agreements invoiced monthly. RTSC Group cannot guarantee grant funding &#8212; our services maximize your chances of success.</div>
-        </div>
-    </div>
-</section>
-
-<!-- PROCESS -->
-<section class="section bg-white" id="process">
-    <div class="container">
-        <div class="section-center reveal">
-            <div class="section-label">Our Process</div>
+            <div class="section-label">Our Approach</div>
             <h2 class="section-title">From Discovery to Lasting Impact</h2>
-            <p class="section-desc">A proven, collaborative approach designed around your unique needs and goals.</p>
+            <p class="section-desc">A proven, collaborative process designed around your organization's unique needs and goals.</p>
         </div>
-        <div class="process-grid">
-            <div class="process-card reveal reveal-delay-1"><div class="process-num">1</div><h3>Discovery Call</h3><p>Free consultation to understand your mission, challenges, and goals. We listen first.</p><span class="process-connector">&#8594;</span></div>
-            <div class="process-card reveal reveal-delay-2"><div class="process-num">2</div><h3>Needs Assessment</h3><p>Deep analysis of operations, funding landscape, and opportunities through data and stakeholder input.</p><span class="process-connector">&#8594;</span></div>
-            <div class="process-card reveal reveal-delay-3"><div class="process-num">3</div><h3>Strategy &amp; Execution</h3><p>Customized plan development and hands-on implementation working alongside your team.</p><span class="process-connector">&#8594;</span></div>
-            <div class="process-card reveal"><div class="process-num">4</div><h3>Measure &amp; Grow</h3><p>Regular check-ins, progress metrics, and adaptive strategies for continuous improvement.</p></div>
+        <div class="process-row reveal">
+            <div class="process-step">
+                <div class="process-num">1</div>
+                <h4>Discovery</h4>
+                <p>Free consultation to understand your mission, challenges, and goals. We listen first.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">2</div>
+                <h4>Assessment</h4>
+                <p>Deep analysis of operations, funding landscape, and strategic opportunities.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">3</div>
+                <h4>Execution</h4>
+                <p>Customized strategy development and hands-on implementation alongside your team.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">4</div>
+                <h4>Growth</h4>
+                <p>Progress metrics, regular check-ins, and adaptive strategies for sustained success.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-    <div class="cta-bg"></div>
+<!-- CTA BANNER -->
+<section class="cta-banner">
+    <div class="cta-banner-bg"><img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1920&q=80" alt=""></div>
     <div class="container cta-inner reveal">
         <h2>Ready to Strengthen Your Mission?</h2>
-        <p>Let's work together to secure funding, build your team, and amplify your community impact.</p>
-        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-            <a href="#contact" class="btn btn-primary" style="font-size:1rem;padding:16px 36px;">Schedule a Consultation &#8594;</a>
-            <a href="mailto:egaffney@rtscgroup.com" class="btn btn-white" style="font-size:1rem;padding:16px 36px;">Email Us Directly</a>
-        </div>
+        <p>Let's build a strategy that secures funding, grows your team, and amplifies your community impact.</p>
+        <a href="#contact" class="btn btn-accent btn-arrow" style="font-size:1rem;padding:16px 40px;">Start a Conversation</a>
     </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
     <div class="container">
-        <div class="contact-grid">
-            <div class="contact-info reveal">
-                <div class="section-label">Contact</div>
-                <h3 class="section-title">Let's Get Started</h3>
-                <p>Schedule a free consultation to discuss your goals and discover how RTSC Group can help you secure funding, build capacity, and create lasting impact.</p>
+        <div class="contact-layout">
+            <div class="contact-left reveal">
+                <div class="section-label">Get In Touch</div>
+                <h3 class="section-title">Let's Talk About Your Goals</h3>
+                <p>Schedule a free consultation to discover how RTSC Group can help your organization secure funding, build capacity, and create lasting impact.</p>
                 <div class="contact-detail">
-                    <div class="contact-detail-icon"><img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
-                    <div><strong>Email</strong><span>egaffney@rtscgroup.com</span></div>
-                </div>
-                <div class="contact-detail">
-                    <div class="contact-detail-icon"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
+                    <div class="contact-detail-dot"></div>
                     <div><strong>Location</strong><span>Northern Virginia &#183; Serving Clients Nationwide</span></div>
                 </div>
                 <div class="contact-detail">
-                    <div class="contact-detail-icon"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=96&h=96&fit=crop&q=80" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div>
+                    <div class="contact-detail-dot"></div>
                     <div><strong>Response Time</strong><span>We respond within 1 business day</span></div>
                 </div>
-                <div style="margin-top:40px;"><img src="assets/logo.png" alt="RTSC Group" style="width:100px;opacity:0.12;"></div>
+                <div class="contact-detail">
+                    <div class="contact-detail-dot"></div>
+                    <div><strong>Free Consultation</strong><span>No commitment required &#8212; let's explore how we can help</span></div>
+                </div>
             </div>
             <div class="reveal">
                 <form class="contact-form" action="https://formsubmit.co/egaffney@rtscgroup.com" method="POST">
@@ -526,12 +415,12 @@
                     <input type="hidden" name="_next" value="https://rtscgroup.com/#contact">
                     <input type="text" name="_honey" style="display:none">
                     <div class="form-row">
-                        <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required placeholder="Your name"></div>
-                        <div class="form-group"><label for="org">Organization</label><input type="text" id="org" name="organization" placeholder="Your organization"></div>
+                        <div class="form-group"><label>Full Name</label><input type="text" name="name" required placeholder="Your name"></div>
+                        <div class="form-group"><label>Organization</label><input type="text" name="organization" placeholder="Your organization"></div>
                     </div>
-                    <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required placeholder="you@organization.org"></div>
-                    <div class="form-group"><label for="interest">I'm Interested In</label>
-                        <select id="interest" name="service_interest">
+                    <div class="form-group"><label>Email Address</label><input type="email" name="email" required placeholder="you@organization.org"></div>
+                    <div class="form-group"><label>I'm Interested In</label>
+                        <select name="service_interest">
                             <option value="">Select a service area</option>
                             <option value="Grant Writing">Grant Writing &amp; Management</option>
                             <option value="Strategic Planning">Strategic Planning</option>
@@ -539,12 +428,12 @@
                             <option value="Nonprofit Startup">Nonprofit Startup</option>
                             <option value="Board Development">Board &amp; Leadership Development</option>
                             <option value="Program Development">Program Development &amp; Evaluation</option>
-                            <option value="Retainer">Retainer / Ongoing Support</option>
+                            <option value="Retainer">Ongoing Support / Retainer</option>
                             <option value="Other">Something Else</option>
                         </select>
                     </div>
-                    <div class="form-group"><label for="message">Tell Us About Your Needs</label><textarea id="message" name="message" placeholder="What challenges are you facing? What goals are you working toward?"></textarea></div>
-                    <button type="submit" class="btn btn-primary btn-submit">Send Message &#8594;</button>
+                    <div class="form-group"><label>Tell Us About Your Needs</label><textarea name="message" placeholder="What challenges are you facing? What goals are you working toward?"></textarea></div>
+                    <button type="submit" class="btn btn-primary btn-submit btn-arrow">Send Message</button>
                 </form>
             </div>
         </div>
@@ -555,10 +444,25 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-brand"><img src="assets/logo-nav.png" alt="RTSC Group"><p>Real Transformative Solutions Consulting Group. Empowering nonprofits with the strategies, funding, and leadership they need to create lasting community impact.</p></div>
-            <div class="footer-col"><h4>Services</h4><a href="#services">Grant Writing</a><a href="#services">Strategic Planning</a><a href="#services">Fundraising</a><a href="#services">Nonprofit Startup</a><a href="#services">Board Development</a></div>
-            <div class="footer-col"><h4>Company</h4><a href="#pricing">Pricing</a><a href="#process">Our Process</a><a href="#about">About Us</a><a href="#contact">Contact</a></div>
-            <div class="footer-col"><h4>Get in Touch</h4><a href="mailto:egaffney@rtscgroup.com">egaffney@rtscgroup.com</a><a href="#contact">Schedule a Call</a><a>Northern Virginia</a></div>
+            <div>
+                <div class="footer-brand"><img src="assets/logo-nav.png" alt="RTSC Group"><span>RTSC Group</span></div>
+                <p class="footer-desc">Real Transformative Solutions Consulting Group. Empowering nonprofits with the strategies, funding, and leadership they need to create lasting community impact.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="#services">Grant Writing</a>
+                <a href="#services">Strategic Planning</a>
+                <a href="#services">Fundraising</a>
+                <a href="#services">Nonprofit Startup</a>
+                <a href="#services">Board Development</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="#about">About Us</a>
+                <a href="#approach">Our Approach</a>
+                <a href="#contact">Contact</a>
+                <a>Northern Virginia</a>
+            </div>
         </div>
         <div class="footer-bottom">
             <span>&#169; 2025 Real Transformative Solutions Consulting Group. All rights reserved.</span>
@@ -569,12 +473,11 @@
 
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>40)});
-const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
-document.querySelectorAll('.pricing-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pricing-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.pricing-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById('panel-'+tab.dataset.tab).classList.add('active')})});
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const h=document.getElementById('hamburger'),n=document.getElementById('navLinks');
+h.addEventListener('click',()=>n.classList.toggle('open'));
+n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('open')));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
