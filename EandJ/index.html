@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Erica & Josh — Our Adventures</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --blue: #2E3B8C; --blue-deep: #1A2463; --blue-mid: #3D4DAE; --blue-light: #5C6BD6;
+            --blue-pale: #E8EAF6; --blue-ghost: #F3F4FB;
+            --accent: #E8734A; --accent-dark: #D4603A; --accent-light: #FAD4C4;
+            --white: #FFFFFF; --off: #F7F8FC; --cream: #FAFAFE;
+            --g50: #F5F6FA; --g100: #ECEEF5; --g200: #D8DAE8; --g300: #B4B8D0;
+            --g400: #8E94B4; --g500: #6B7294; --g600: #515777; --g700: #3A3F5C; --g800: #252842;
+            --text: #1A1D2E; --muted: #6B7294;
+            --r: 12px; --rl: 20px; --rxl: 28px;
+            --sh: 0 4px 24px rgba(26,36,99,0.06);
+            --shl: 0 12px 48px rgba(26,36,99,0.10);
+            --tr: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text); background: var(--white); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; color: var(--blue-deep); }
+        h4, h5, h6 { font-family: 'Inter', sans-serif; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+        /* HERO */
+        .ej-hero {
+            position: relative; min-height: 50vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 50%, var(--blue-light) 100%);
+            overflow: hidden;
+        }
+        .ej-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.03)" d="M0,128L48,138.7C96,149,192,171,288,186.7C384,203,480,213,576,197.3C672,181,768,139,864,128C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>') no-repeat bottom center;
+            background-size: cover;
+        }
+        .ej-hero-content { position: relative; z-index: 2; padding: 120px 0 80px; text-align: center; max-width: 700px; margin: 0 auto; }
+        .ej-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white); margin-bottom: 16px; letter-spacing: -0.02em; }
+        .ej-hero h1 em { color: var(--accent); font-style: italic; }
+        .ej-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 32px; }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: var(--white); border-radius: var(--rxl); padding: 28px 48px;
+            box-shadow: var(--shl); display: flex; justify-content: center; gap: 64px;
+            margin: -40px auto 0; position: relative; z-index: 10; max-width: 800px;
+        }
+        .stat-item { text-align: center; }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--blue); line-height: 1; }
+        .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* MAP SECTION */
+        .map-section { padding: 80px 0 60px; }
+        .map-wrapper {
+            border-radius: var(--rl); overflow: hidden; box-shadow: var(--shl);
+            border: 1px solid var(--g100); position: relative;
+        }
+        #map { height: 560px; width: 100%; z-index: 1; }
+
+        /* UPLOAD CONTROLS */
+        .controls-section { padding: 40px 0; }
+        .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .control-card {
+            background: var(--white); border-radius: var(--rl); padding: 32px;
+            border: 1px solid var(--g100); transition: var(--tr);
+        }
+        .control-card:hover { box-shadow: var(--sh); }
+        .control-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--blue-deep); }
+        .control-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+
+        .upload-zone {
+            border: 2px dashed var(--g200); border-radius: var(--r); padding: 32px;
+            text-align: center; cursor: pointer; transition: var(--tr);
+            background: var(--g50);
+        }
+        .upload-zone:hover, .upload-zone.dragover { border-color: var(--blue); background: var(--blue-pale); }
+        .upload-zone-icon { font-size: 2rem; margin-bottom: 8px; }
+        .upload-zone-text { font-size: 0.85rem; color: var(--muted); }
+        .upload-zone-text strong { color: var(--blue); }
+        .upload-zone input[type="file"] { display: none; }
+
+        /* SOURCE BADGES */
+        .source-badges { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .source-badge {
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
+        }
+        .source-badge.strava { background: #FC4C02; color: white; }
+        .source-badge.alltrails { background: #428813; color: white; }
+        .source-badge.garmin { background: #007CC3; color: white; }
+        .source-badge svg { width: 14px; height: 14px; }
+
+        /* ACTIVITY FORM */
+        .activity-form { display: none; margin-top: 20px; }
+        .activity-form.visible { display: block; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--g700); margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 14px; border: 1.5px solid var(--g200);
+            border-radius: 10px; font-family: inherit; font-size: 0.88rem;
+            color: var(--text); background: var(--g50); transition: var(--tr); outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(46,59,140,0.08);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: var(--tr);
+            cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-primary { background: var(--blue); color: var(--white); }
+        .btn-primary:hover { background: var(--blue-mid); transform: translateY(-1px); }
+        .btn-accent { background: var(--accent); color: var(--white); }
+        .btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--g200); }
+        .btn-outline:hover { border-color: var(--blue); background: var(--blue-pale); }
+        .btn-sm { padding: 8px 16px; font-size: 0.78rem; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+
+        /* ACTIVITIES LIST */
+        .activities-section { padding: 40px 0 80px; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+        .section-header h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+        .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-pill {
+            padding: 8px 18px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+            border: 1.5px solid var(--g200); background: var(--white); cursor: pointer;
+            transition: var(--tr); color: var(--muted);
+        }
+        .filter-pill:hover, .filter-pill.active { border-color: var(--blue); background: var(--blue-pale); color: var(--blue); }
+
+        .activity-list { display: flex; flex-direction: column; gap: 16px; }
+        .activity-card {
+            background: var(--white); border-radius: var(--rl); padding: 24px;
+            border: 1px solid var(--g100); transition: var(--tr); display: grid;
+            grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+            cursor: pointer;
+        }
+        .activity-card:hover { box-shadow: var(--sh); transform: translateY(-2px); border-color: var(--blue-pale); }
+        .activity-card.active { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-pale); }
+        .activity-icon {
+            width: 48px; height: 48px; border-radius: 12px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.4rem;
+        }
+        .activity-icon.hike { background: #E8F5E9; }
+        .activity-icon.run { background: #FFF3E0; }
+        .activity-icon.walk { background: #E3F2FD; }
+        .activity-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .activity-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+        .activity-meta span { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+        .activity-stats { text-align: right; }
+        .activity-distance { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--blue); line-height: 1; }
+        .activity-unit { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+        .activity-actions { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; }
+
+        /* PHOTO GALLERY */
+        .photo-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 16px; }
+        .photo-thumb {
+            aspect-ratio: 1; border-radius: var(--r); overflow: hidden; cursor: pointer;
+            position: relative; border: 2px solid transparent; transition: var(--tr);
+        }
+        .photo-thumb:hover { border-color: var(--accent); transform: scale(1.03); }
+        .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-thumb .remove-photo {
+            position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
+            background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%;
+            cursor: pointer; font-size: 0.7rem; display: flex; align-items: center;
+            justify-content: center; opacity: 0; transition: var(--tr);
+        }
+        .photo-thumb:hover .remove-photo { opacity: 1; }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999;
+            display: none; align-items: center; justify-content: center; padding: 40px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: var(--r); object-fit: contain; }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 24px; background: none; border: none;
+            color: white; font-size: 2rem; cursor: pointer; padding: 8px; line-height: 1;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center; padding: 64px 32px; color: var(--muted);
+            border: 2px dashed var(--g200); border-radius: var(--rl); margin-top: 16px;
+        }
+        .empty-state-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+        .empty-state h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--g600); margin-bottom: 8px; }
+        .empty-state p { font-size: 0.88rem; max-width: 400px; margin: 0 auto; }
+
+        /* HOW-TO GUIDE */
+        .guide-section { padding: 40px 0 80px; }
+        .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .guide-card {
+            background: var(--white); border-radius: var(--rl); padding: 32px;
+            border: 1px solid var(--g100); text-align: center;
+        }
+        .guide-card-icon { font-size: 2.4rem; margin-bottom: 16px; }
+        .guide-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+        .guide-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+        .guide-card ol { text-align: left; font-size: 0.82rem; color: var(--muted); line-height: 1.9; padding-left: 20px; }
+
+        /* MANUAL ADD */
+        .manual-add-section { padding: 0 0 40px; }
+        .manual-form {
+            background: var(--white); border-radius: var(--rl); padding: 32px;
+            border: 1px solid var(--g100);
+        }
+        .manual-form h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px; }
+
+        /* TOAST */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px; padding: 14px 24px;
+            background: var(--blue-deep); color: white; border-radius: var(--r);
+            font-size: 0.85rem; font-weight: 500; z-index: 9999;
+            transform: translateY(100px); opacity: 0; transition: var(--tr);
+            box-shadow: var(--shl);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .stats-bar { flex-direction: column; gap: 20px; padding: 24px; margin: -30px 16px 0; }
+            .controls-grid { grid-template-columns: 1fr; }
+            .guide-grid { grid-template-columns: 1fr; }
+            .activity-card { grid-template-columns: 1fr; gap: 12px; }
+            .activity-stats { text-align: left; }
+            .section-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+            #map { height: 400px; }
+            .form-row { grid-template-columns: 1fr; }
+            .ej-hero-content { padding: 100px 0 60px; }
+        }
+
+        /* REVEAL ANIMATION */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* LEAFLET POPUP */
+        .leaflet-popup-content-wrapper { border-radius: var(--r) !important; box-shadow: var(--shl) !important; }
+        .leaflet-popup-content { font-family: 'Inter', sans-serif !important; font-size: 0.85rem !important; }
+        .popup-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+        .popup-meta { color: var(--muted); font-size: 0.78rem; }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="ej-hero">
+    <div class="container ej-hero-content">
+        <h1>Erica <em>&</em> Josh</h1>
+        <p class="ej-hero-sub">Every trail, every mile, every adventure together.</p>
+    </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="container">
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num" id="totalMiles">0</div>
+            <div class="stat-label">Total Miles</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num" id="totalActivities">0</div>
+            <div class="stat-label">Adventures</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num" id="totalPhotos">0</div>
+            <div class="stat-label">Photos</div>
+        </div>
+    </div>
+</div>
+
+<!-- MAP -->
+<section class="map-section">
+    <div class="container">
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </div>
+</section>
+
+<!-- UPLOAD CONTROLS -->
+<section class="controls-section">
+    <div class="container">
+        <div class="controls-grid">
+            <!-- GPX UPLOAD -->
+            <div class="control-card reveal">
+                <h3>Import Activity Data</h3>
+                <p>Upload GPX files exported from Strava, AllTrails, or Garmin Connect.</p>
+                <div class="source-badges">
+                    <span class="source-badge strava">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+                        Strava
+                    </span>
+                    <span class="source-badge alltrails">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 4l7 14H5l7-14z"/></svg>
+                        AllTrails
+                    </span>
+                    <span class="source-badge garmin">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        Garmin
+                    </span>
+                </div>
+                <div class="upload-zone" id="gpxDropZone">
+                    <div class="upload-zone-icon">&#128506;</div>
+                    <div class="upload-zone-text">
+                        <strong>Drop GPX files here</strong> or click to browse<br>
+                        <small>Supports .gpx files from any platform</small>
+                    </div>
+                    <input type="file" id="gpxInput" accept=".gpx" multiple>
+                </div>
+                <div class="activity-form" id="gpxForm">
+                    <div class="form-group">
+                        <label>Activity Name</label>
+                        <input type="text" id="gpxName" placeholder="Morning hike at Shenandoah">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="gpxType">
+                                <option value="hike">Hike</option>
+                                <option value="run">Run</option>
+                                <option value="walk">Walk</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Source</label>
+                            <select id="gpxSource">
+                                <option value="strava">Strava</option>
+                                <option value="alltrails">AllTrails</option>
+                                <option value="garmin">Garmin Connect</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes (optional)</label>
+                        <textarea id="gpxNotes" rows="2" placeholder="What made this one special?"></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" onclick="saveGpxActivity()">Save Activity</button>
+                        <button class="btn btn-outline" onclick="cancelGpxUpload()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHOTO UPLOAD -->
+            <div class="control-card reveal">
+                <h3>Add Photos</h3>
+                <p>Upload photos from your adventures. Select an activity to attach them to.</p>
+                <div class="form-group">
+                    <label>Attach to Activity</label>
+                    <select id="photoActivity">
+                        <option value="">Select an activity first...</option>
+                    </select>
+                </div>
+                <div class="upload-zone" id="photoDropZone">
+                    <div class="upload-zone-icon">&#128247;</div>
+                    <div class="upload-zone-text">
+                        <strong>Drop photos here</strong> or click to browse<br>
+                        <small>JPG, PNG, WebP supported</small>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" multiple>
+                </div>
+                <div class="photo-gallery" id="photoPreview"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MANUAL ADD -->
+<section class="manual-add-section">
+    <div class="container">
+        <div class="manual-form reveal">
+            <h3>Add Activity Manually</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 20px;">Don't have a GPX file? Add an activity by hand.</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Activity Name</label>
+                    <input type="text" id="manualName" placeholder="Sunset hike at Great Falls">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="manualLocation" placeholder="Great Falls, VA">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="manualDate">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="manualType">
+                        <option value="hike">Hike</option>
+                        <option value="run">Run</option>
+                        <option value="walk">Walk</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Distance (miles)</label>
+                    <input type="number" id="manualDistance" step="0.1" placeholder="3.5">
+                </div>
+                <div class="form-group">
+                    <label>Duration (e.g., 1h 30m)</label>
+                    <input type="text" id="manualDuration" placeholder="1h 30m">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Latitude (optional)</label>
+                    <input type="number" id="manualLat" step="0.0001" placeholder="38.9072">
+                </div>
+                <div class="form-group">
+                    <label>Longitude (optional)</label>
+                    <input type="number" id="manualLng" step="0.0001" placeholder="-77.0369">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Notes (optional)</label>
+                <textarea id="manualNotes" rows="2" placeholder="Any notes about this adventure?"></textarea>
+            </div>
+            <button class="btn btn-accent" onclick="saveManualActivity()">Add Adventure</button>
+        </div>
+    </div>
+</section>
+
+<!-- ACTIVITIES LIST -->
+<section class="activities-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2>Our Adventures</h2>
+            <div class="filter-pills">
+                <button class="filter-pill active" data-filter="all" onclick="filterActivities('all', this)">All</button>
+                <button class="filter-pill" data-filter="hike" onclick="filterActivities('hike', this)">Hikes</button>
+                <button class="filter-pill" data-filter="run" onclick="filterActivities('run', this)">Runs</button>
+                <button class="filter-pill" data-filter="walk" onclick="filterActivities('walk', this)">Walks</button>
+            </div>
+        </div>
+        <div class="activity-list" id="activityList">
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">&#127956;</div>
+                <h3>No adventures yet</h3>
+                <p>Upload a GPX file from Strava, AllTrails, or Garmin to get started, or add an activity manually above.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW-TO GUIDE -->
+<section class="guide-section">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: clamp(1.6rem, 3vw, 2.2rem);" class="reveal">How to Export Your Data</h2>
+        <div class="guide-grid">
+            <div class="guide-card reveal">
+                <div class="guide-card-icon" style="color: #FC4C02;">&#9996;</div>
+                <h4 style="color: #FC4C02;">From Strava</h4>
+                <ol>
+                    <li>Go to strava.com/settings/profile</li>
+                    <li>Click "Download or Delete Your Account"</li>
+                    <li>Request your archive</li>
+                    <li>Or: open any activity, click "..." then "Export GPX"</li>
+                </ol>
+            </div>
+            <div class="guide-card reveal">
+                <div class="guide-card-icon" style="color: #428813;">&#9968;</div>
+                <h4 style="color: #428813;">From AllTrails</h4>
+                <ol>
+                    <li>Open alltrails.com and go to your profile</li>
+                    <li>Open a completed activity</li>
+                    <li>Click the "..." menu</li>
+                    <li>Select "Export as GPX"</li>
+                </ol>
+            </div>
+            <div class="guide-card reveal">
+                <div class="guide-card-icon" style="color: #007CC3;">&#9201;</div>
+                <h4 style="color: #007CC3;">From Garmin Connect</h4>
+                <ol>
+                    <li>Go to connect.garmin.com</li>
+                    <li>Open an activity</li>
+                    <li>Click the gear icon (&#9881;)</li>
+                    <li>Select "Export to GPX"</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function() {
+    'use strict';
+
+    // --- DATA STORE ---
+    const STORAGE_KEY = 'ej_adventures';
+    let activities = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    let currentGpxData = null;
+    let map, markersGroup, routesGroup;
+
+    // --- MAP INIT ---
+    function initMap() {
+        map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true
+        }).setView([38.9, -77.0], 8);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        markersGroup = L.featureGroup().addTo(map);
+        routesGroup = L.featureGroup().addTo(map);
+
+        renderMap();
+    }
+
+    function renderMap() {
+        markersGroup.clearLayers();
+        routesGroup.clearLayers();
+
+        const bounds = [];
+
+        activities.forEach((act, idx) => {
+            const color = act.type === 'hike' ? '#428813' : act.type === 'run' ? '#FC4C02' : '#007CC3';
+            const icon = act.type === 'hike' ? '&#9968;' : act.type === 'run' ? '&#127939;' : '&#128694;';
+
+            // Draw route if GPX coords exist
+            if (act.coords && act.coords.length > 1) {
+                const latlngs = act.coords.map(c => [c[0], c[1]]);
+                const polyline = L.polyline(latlngs, {
+                    color: color, weight: 4, opacity: 0.8, smoothFactor: 1
+                }).addTo(routesGroup);
+                polyline.bindPopup(`<div class="popup-title">${act.name}</div><div class="popup-meta">${act.distance ? act.distance + ' mi' : ''} ${act.type}</div>`);
+                bounds.push(...latlngs);
+            }
+
+            // Add marker
+            if (act.lat && act.lng) {
+                const marker = L.circleMarker([act.lat, act.lng], {
+                    radius: 8, fillColor: color, color: '#fff',
+                    weight: 2, opacity: 1, fillOpacity: 0.9
+                }).addTo(markersGroup);
+                marker.bindPopup(`
+                    <div class="popup-title">${act.name}</div>
+                    <div class="popup-meta">
+                        ${act.date || ''} &bull; ${act.distance ? act.distance + ' mi' : ''} &bull; ${act.type}<br>
+                        ${act.location || ''}${act.notes ? '<br><em>' + act.notes + '</em>' : ''}
+                    </div>
+                `);
+                bounds.push([act.lat, act.lng]);
+            }
+        });
+
+        if (bounds.length > 0) {
+            map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+        }
+    }
+
+    // --- GPX PARSER ---
+    function parseGPX(xmlStr) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xmlStr, 'text/xml');
+        const coords = [];
+        let totalDist = 0;
+        let name = '';
+        let date = '';
+
+        // Get name
+        const nameEl = doc.querySelector('trk > name') || doc.querySelector('metadata > name');
+        if (nameEl) name = nameEl.textContent;
+
+        // Get date
+        const timeEl = doc.querySelector('metadata > time') || doc.querySelector('trkpt > time');
+        if (timeEl) {
+            const d = new Date(timeEl.textContent);
+            date = d.toISOString().split('T')[0];
+        }
+
+        // Get track points
+        const trkpts = doc.querySelectorAll('trkpt');
+        trkpts.forEach((pt, i) => {
+            const lat = parseFloat(pt.getAttribute('lat'));
+            const lon = parseFloat(pt.getAttribute('lon'));
+            const eleEl = pt.querySelector('ele');
+            const ele = eleEl ? parseFloat(eleEl.textContent) : 0;
+            coords.push([lat, lon, ele]);
+
+            if (i > 0) {
+                totalDist += haversine(coords[i-1][0], coords[i-1][1], lat, lon);
+            }
+        });
+
+        // Also check route points
+        if (coords.length === 0) {
+            const rtepts = doc.querySelectorAll('rtept');
+            rtepts.forEach((pt, i) => {
+                const lat = parseFloat(pt.getAttribute('lat'));
+                const lon = parseFloat(pt.getAttribute('lon'));
+                coords.push([lat, lon, 0]);
+                if (i > 0) {
+                    totalDist += haversine(coords[i-1][0], coords[i-1][1], lat, lon);
+                }
+            });
+        }
+
+        return { coords, distance: Math.round(totalDist * 100) / 100, name, date };
+    }
+
+    function haversine(lat1, lon1, lat2, lon2) {
+        const R = 3958.8; // Earth radius in miles
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLon/2) * Math.sin(dLon/2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    // --- GPX UPLOAD HANDLING ---
+    const gpxDropZone = document.getElementById('gpxDropZone');
+    const gpxInput = document.getElementById('gpxInput');
+
+    gpxDropZone.addEventListener('click', () => gpxInput.click());
+    gpxDropZone.addEventListener('dragover', e => { e.preventDefault(); gpxDropZone.classList.add('dragover'); });
+    gpxDropZone.addEventListener('dragleave', () => gpxDropZone.classList.remove('dragover'));
+    gpxDropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        gpxDropZone.classList.remove('dragover');
+        handleGpxFiles(e.dataTransfer.files);
+    });
+    gpxInput.addEventListener('change', e => handleGpxFiles(e.target.files));
+
+    function handleGpxFiles(files) {
+        for (const file of files) {
+            if (!file.name.endsWith('.gpx')) { showToast('Please upload .gpx files'); continue; }
+            const reader = new FileReader();
+            reader.onload = e => {
+                currentGpxData = parseGPX(e.target.result);
+                document.getElementById('gpxName').value = currentGpxData.name || file.name.replace('.gpx', '');
+                document.getElementById('gpxForm').classList.add('visible');
+                showToast(`Parsed: ${currentGpxData.coords.length} points, ${currentGpxData.distance} mi`);
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    window.saveGpxActivity = function() {
+        if (!currentGpxData) return;
+        const name = document.getElementById('gpxName').value || 'Untitled Activity';
+        const type = document.getElementById('gpxType').value;
+        const source = document.getElementById('gpxSource').value;
+        const notes = document.getElementById('gpxNotes').value;
+
+        // Downsample coords for storage (keep every Nth point to stay under localStorage limits)
+        let coords = currentGpxData.coords;
+        if (coords.length > 500) {
+            const step = Math.ceil(coords.length / 500);
+            coords = coords.filter((_, i) => i % step === 0);
+            // Always include the last point
+            if (coords[coords.length - 1] !== currentGpxData.coords[currentGpxData.coords.length - 1]) {
+                coords.push(currentGpxData.coords[currentGpxData.coords.length - 1]);
+            }
+        }
+
+        const midIdx = Math.floor(coords.length / 2);
+        const activity = {
+            id: Date.now().toString(36),
+            name, type, source, notes,
+            date: currentGpxData.date || new Date().toISOString().split('T')[0],
+            distance: currentGpxData.distance,
+            lat: coords.length > 0 ? coords[midIdx][0] : null,
+            lng: coords.length > 0 ? coords[midIdx][1] : null,
+            coords: coords,
+            photos: []
+        };
+
+        activities.push(activity);
+        save();
+        cancelGpxUpload();
+        showToast(`"${name}" added!`);
+    };
+
+    window.cancelGpxUpload = function() {
+        currentGpxData = null;
+        document.getElementById('gpxForm').classList.remove('visible');
+        document.getElementById('gpxName').value = '';
+        document.getElementById('gpxNotes').value = '';
+        gpxInput.value = '';
+    };
+
+    // --- MANUAL ACTIVITY ---
+    window.saveManualActivity = function() {
+        const name = document.getElementById('manualName').value;
+        if (!name) { showToast('Please enter an activity name'); return; }
+
+        const activity = {
+            id: Date.now().toString(36),
+            name,
+            location: document.getElementById('manualLocation').value,
+            date: document.getElementById('manualDate').value || new Date().toISOString().split('T')[0],
+            type: document.getElementById('manualType').value,
+            distance: parseFloat(document.getElementById('manualDistance').value) || 0,
+            duration: document.getElementById('manualDuration').value,
+            lat: parseFloat(document.getElementById('manualLat').value) || null,
+            lng: parseFloat(document.getElementById('manualLng').value) || null,
+            notes: document.getElementById('manualNotes').value,
+            coords: [],
+            photos: []
+        };
+
+        activities.push(activity);
+        save();
+
+        // Clear form
+        ['manualName','manualLocation','manualDate','manualDistance','manualDuration','manualLat','manualLng','manualNotes'].forEach(id => {
+            document.getElementById(id).value = '';
+        });
+
+        showToast(`"${name}" added!`);
+    };
+
+    // --- PHOTO UPLOAD ---
+    const photoDropZone = document.getElementById('photoDropZone');
+    const photoInput = document.getElementById('photoInput');
+
+    photoDropZone.addEventListener('click', () => photoInput.click());
+    photoDropZone.addEventListener('dragover', e => { e.preventDefault(); photoDropZone.classList.add('dragover'); });
+    photoDropZone.addEventListener('dragleave', () => photoDropZone.classList.remove('dragover'));
+    photoDropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        photoDropZone.classList.remove('dragover');
+        handlePhotoFiles(e.dataTransfer.files);
+    });
+    photoInput.addEventListener('change', e => handlePhotoFiles(e.target.files));
+
+    function handlePhotoFiles(files) {
+        const actId = document.getElementById('photoActivity').value;
+        if (!actId) { showToast('Please select an activity first'); return; }
+
+        const act = activities.find(a => a.id === actId);
+        if (!act) return;
+
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            const reader = new FileReader();
+            reader.onload = e => {
+                // Resize image to reduce storage size
+                resizeImage(e.target.result, 800, (resized) => {
+                    act.photos.push(resized);
+                    save();
+                    showToast('Photo added!');
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function resizeImage(dataUrl, maxWidth, callback) {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxWidth) { h = h * maxWidth / w; w = maxWidth; }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            callback(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.src = dataUrl;
+    }
+
+    // --- RENDER ACTIVITIES ---
+    function renderActivities(filter) {
+        const list = document.getElementById('activityList');
+        const empty = document.getElementById('emptyState');
+        const filtered = filter && filter !== 'all' ? activities.filter(a => a.type === filter) : activities;
+
+        // Sort by date descending
+        filtered.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+        if (filtered.length === 0) {
+            list.innerHTML = '';
+            list.appendChild(empty);
+            empty.style.display = '';
+            return;
+        }
+
+        const icons = { hike: '&#9968;', run: '&#127939;', walk: '&#128694;' };
+        const sourceColors = { strava: '#FC4C02', alltrails: '#428813', garmin: '#007CC3' };
+
+        list.innerHTML = filtered.map(act => `
+            <div class="activity-card" data-id="${act.id}" onclick="focusActivity('${act.id}')">
+                <div class="activity-icon ${act.type}">${icons[act.type] || '&#128694;'}</div>
+                <div class="activity-info">
+                    <h4>${act.name}</h4>
+                    <div class="activity-meta">
+                        ${act.date ? `<span>&#128197; ${formatDate(act.date)}</span>` : ''}
+                        ${act.location ? `<span>&#128205; ${act.location}</span>` : ''}
+                        ${act.duration ? `<span>&#9201; ${act.duration}</span>` : ''}
+                        ${act.source ? `<span style="color:${sourceColors[act.source] || 'inherit'};font-weight:600;">${act.source}</span>` : ''}
+                    </div>
+                    ${act.notes ? `<p style="font-size:0.82rem;color:var(--muted);margin-top:6px;font-style:italic;">"${act.notes}"</p>` : ''}
+                    ${act.photos && act.photos.length > 0 ? `
+                        <div class="photo-gallery">
+                            ${act.photos.map((p, pi) => `
+                                <div class="photo-thumb" onclick="event.stopPropagation();openLightbox('${act.id}',${pi})">
+                                    <img src="${p}" alt="Photo">
+                                    <button class="remove-photo" onclick="event.stopPropagation();removePhoto('${act.id}',${pi})">&times;</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="activity-stats">
+                    <div class="activity-distance">${act.distance || 0}</div>
+                    <div class="activity-unit">miles</div>
+                    <div class="activity-actions">
+                        <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();deleteActivity('${act.id}')" title="Delete">&#128465;</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function formatDate(dateStr) {
+        const d = new Date(dateStr + 'T00:00:00');
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    // --- ACTIVITY ACTIONS ---
+    window.focusActivity = function(id) {
+        const act = activities.find(a => a.id === id);
+        if (!act) return;
+
+        document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('active'));
+        document.querySelector(`.activity-card[data-id="${id}"]`)?.classList.add('active');
+
+        if (act.coords && act.coords.length > 1) {
+            const latlngs = act.coords.map(c => [c[0], c[1]]);
+            map.fitBounds(latlngs, { padding: [60, 60], maxZoom: 15 });
+        } else if (act.lat && act.lng) {
+            map.setView([act.lat, act.lng], 14);
+        }
+    };
+
+    window.deleteActivity = function(id) {
+        if (!confirm('Delete this adventure?')) return;
+        activities = activities.filter(a => a.id !== id);
+        save();
+        showToast('Activity deleted');
+    };
+
+    window.removePhoto = function(actId, photoIdx) {
+        const act = activities.find(a => a.id === actId);
+        if (act) {
+            act.photos.splice(photoIdx, 1);
+            save();
+        }
+    };
+
+    window.filterActivities = function(filter, el) {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        renderActivities(filter);
+    };
+
+    // --- LIGHTBOX ---
+    window.openLightbox = function(actId, photoIdx) {
+        const act = activities.find(a => a.id === actId);
+        if (!act || !act.photos[photoIdx]) return;
+        document.getElementById('lightboxImg').src = act.photos[photoIdx];
+        document.getElementById('lightbox').classList.add('active');
+    };
+    window.closeLightbox = function() {
+        document.getElementById('lightbox').classList.remove('active');
+    };
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // --- STATS ---
+    function updateStats() {
+        const totalMiles = activities.reduce((sum, a) => sum + (a.distance || 0), 0);
+        const totalPhotos = activities.reduce((sum, a) => sum + (a.photos ? a.photos.length : 0), 0);
+        animateNumber('totalMiles', totalMiles, 1);
+        animateNumber('totalActivities', activities.length, 0);
+        animateNumber('totalPhotos', totalPhotos, 0);
+    }
+
+    function animateNumber(id, target, decimals) {
+        const el = document.getElementById(id);
+        const start = parseFloat(el.textContent) || 0;
+        const duration = 600;
+        const startTime = performance.now();
+
+        function tick(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = start + (target - start) * eased;
+            el.textContent = current.toFixed(decimals);
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    }
+
+    // --- ACTIVITY DROPDOWN ---
+    function updateActivityDropdown() {
+        const sel = document.getElementById('photoActivity');
+        const currentVal = sel.value;
+        sel.innerHTML = '<option value="">Select an activity...</option>';
+        activities.forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = a.id;
+            opt.textContent = `${a.name} (${formatDate(a.date)})`;
+            sel.appendChild(opt);
+        });
+        if (currentVal) sel.value = currentVal;
+    }
+
+    // --- SAVE & RENDER ---
+    function save() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
+        } catch (e) {
+            showToast('Storage full! Try removing some photos.');
+        }
+        render();
+    }
+
+    function render() {
+        updateStats();
+        renderActivities();
+        renderMap();
+        updateActivityDropdown();
+    }
+
+    // --- TOAST ---
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // --- REVEAL ANIMATION ---
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // --- INIT ---
+    initMap();
+    render();
+})();
+</script>
+</body>
+</html>
