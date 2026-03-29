@@ -1,0 +1,9 @@
+# robots.txt for rtscgroup.com
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rtscgroup.com/sitemap.xml
+
+# Disallow internal/hidden paths
+Disallow: /EandJ/
